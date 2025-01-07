@@ -1,0 +1,14 @@
+# Frontend .dockerignore
+node_modules
+.next
+.git
+.env
+.env.local
+*.log
+
+# Backend .dockerignore (in /api)
+__pycache__
+*.pyc
+.env
+venv
+*.log

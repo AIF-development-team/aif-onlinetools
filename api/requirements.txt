@@ -1,0 +1,24 @@
+# FastAPI and related
+fastapi>=0.104.0
+uvicorn>=0.24.0
+python-multipart>=0.0.6
+pydantic>=2.4.2
+
+# Data handling
+gemmi>=0.7.0
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Custom packages from GitHub
+git+https://github.com/AIF-development-team/adsorption-file-parser.git@restructure
+git+https://github.com/AIF-development-team/checkAIF.git@develop
+
+# Development and testing
+pytest>=7.4.0
+black>=23.9.0
+flake8>=6.1.0
+mypy>=1.6.0
+
+# System dependencies
+setuptools>=68.0.0
+wheel>=0.41.0
