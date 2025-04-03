@@ -239,7 +239,7 @@ export default function AifInputDigitizer() {
         desorption_data: desorptionData.filter(row => Object.keys(row).length > 0)
       };
 
-      const response = await fetch('http://localhost:8000/api/input-to-aif', {
+      const response = await fetch('/api/input-to-aif', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

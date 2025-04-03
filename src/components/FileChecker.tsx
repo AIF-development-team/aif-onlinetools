@@ -41,7 +41,7 @@ export default function FileChecker() {
     try {
       const fileContent = await fileObj.file.text();
       
-      const response = await fetch('http://localhost:8000/api/check-aif', {
+      const response = await fetch('/api/check-aif', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

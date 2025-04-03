@@ -62,7 +62,7 @@ export default function FileConverter() {
       formData.append('source_format', sourceFormat);
 
       try {
-        const response = await fetch('http://localhost:8000/api/convert', {
+        const response = await fetch('/api/convert', {
           method: 'POST',
           body: formData,
         });

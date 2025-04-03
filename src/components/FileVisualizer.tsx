@@ -43,7 +43,7 @@ export default function AIFPlotter() {
     formData.append('file', file);
 
     try {
-      const response = await fetch('http://localhost:8000/api/process-aif', {
+      const response = await fetch('/api/process-aif', {
         method: 'POST',
         body: formData,
       });

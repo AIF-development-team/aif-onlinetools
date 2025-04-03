@@ -19,7 +19,7 @@ ENCODINGS = {
     'txt-raw,qnt': 'cp1252',
     'dat,bel': 'cp1252',
     'csv,bel,JPN': 'shift_jis',
-    'csv,bel,ENG': 'ISO-8859-1'
+    'csv,bel,ENG': 'UTF-8'
 }
 
 class IsothermData(BaseModel):
@@ -31,7 +31,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"]
@@ -46,11 +46,9 @@ async def convert_file(file: UploadFile = File(...), source_format: str = Form(.
         content = await file.read()
         format_parts = source_format.split(',')
         format, manufacturer = format_parts[0], format_parts[1]
-        
-        encoding = get_file_encoding(','.join(format_parts[:2]))
+        encoding = get_file_encoding(','.join(format_parts[:3]))
         if encoding:
             content = content.decode(encoding)
-        
         meta, data = afp.read(content, manufacturer=manufacturer, fmt=format)
         data_meta, data_ads, data_des = aif_data_standardise(meta, data)
         aif_doc = makeAIF_generic(data_meta, data_ads, data_des) if manufacturer == 'generic' else makeAIF(data_meta, data_ads, data_des)
