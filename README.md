@@ -1,44 +1,82 @@
 # AIF Online Tools
 
-A web application for working with the Adsorption Information Format (AIF). This tool provides a collection of utilities for converting, validating, and inputting adsorption data in the AIF standard format.
+A web application for producing and validating AIF (Adsorption Information Format) files against standard specifications. This tool performs checks on file structure, required fields, and data consistency.
 
 ## Features
 
-- Convert experimental adsorption data to AIF format
-- Validate AIF files against the schema
-- Input and edit adsorption metadata
-- Visualize adsorption isotherms
-- Export data in various formats
+- Upload and convert multiple AIF files
+- Detailed error reporting and warnings for AIF files
+- Input data directly into an AIF
+- Visualization of isotherms from AIF
+- GDPR compliant - no data storage
+- API for AIF validation and conversion
+- User-friendly interface
 
-## Project Structure
+## Tech Stack
 
-- `/src` - Next.js frontend dashboard
-- `/api` - FastAPI backend for data processing and validation
+- **Frontend**: React/Next.js with Tailwind CSS
+- **Backend**: Python FastAPI
+- **Deployment**: Docker, Docker Compose, Nginx with Let's Encrypt SSL
 
 ## Getting Started
 
-### Start the Frontend
+### Development Setup
 
+1. Clone this repository
+2. Install dependencies:
+   ```bash
+   # Frontend
+   npm install
+   
+   # Backend
+   cd api
+   pip install -r requirements.txt
+   ```
+
+3. Run both services:
+   ```bash
+   # Backend
+   cd api
+   uvicorn main:app --reload
+   
+   # Frontend (in another terminal)
+   npm run dev
+   ```
+
+### Docker Deployment
+
+Build and start the containers:
 ```bash
-npm install
-npm run dev
+docker compose up --build -d
 ```
 
-The dashboard will be available at [http://localhost:3000](http://localhost:3000)
-
-### Start the Backend
-
+For a fresh build without cache:
 ```bash
-cd api
-python -m venv venv  # Create virtual environment (first time only)
-source venv/bin/activate  # On Windows use: venv\Scripts\activate
-pip install -r requirements.txt
-uvicorn main:app --reload
+docker compose build --no-cache && docker compose up -d
 ```
 
-The API will be available at [http://localhost:8000](http://localhost:8000)
+### Setting Up HTTPS with Let's Encrypt
 
-## Development
+1. Install Certbot:
+   ```bash
+   sudo apt install certbot python3-certbot-nginx
+   ```
 
-- Frontend: React/Next.js dashboard application (in `/src`)
-- Backend: Python FastAPI server handling data processing and validatio (in `/api`)
+2. Obtain SSL certificate:
+   ```bash
+   sudo certbot --nginx -d your-domain.com
+   ```
+
+3. Configure Nginx reverse proxy for your containers and restart:
+   ```bash
+   sudo nginx -t
+   sudo systemctl restart nginx
+   ```
+
+## API Endpoints
+
+- `POST /api/check-aif`: Validates an AIF file
+- `POST /api/convert`: Converts formats to AIF
+- `POST /api/input-to-aif`: Generates an AIF document from JSON
+- `POST /api/process-aif`: Extracts plot data from an AIF file
+- `GET /api/health`: Health check endpoint
