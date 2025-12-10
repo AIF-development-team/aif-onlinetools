@@ -62,7 +62,7 @@ export default function FileConverter() {
       formData.append('source_format', sourceFormat);
 
       try {
-        const response = await fetch('/api/convert', {
+        const response = await fetch('https://online.adsorptioninformationformat.com/api/convert', {
           method: 'POST',
           body: formData,
         });
