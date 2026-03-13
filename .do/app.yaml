@@ -17,8 +17,8 @@ services:
     source_dir: /
     environment_slug: node-js
     http_port: 3000
-    build_command: npm ci && npm run build
-    run_command: npm start
+    build_command: npm ci && npm run build && cp -r public .next/standalone/public && cp -r .next/static .next/standalone/.next/static
+    run_command: node .next/standalone/server.js
     routes:
       - path: /
     envs:
