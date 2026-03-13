@@ -14,6 +14,7 @@ git+https://github.com/AIF-development-team/adsorption-file-parser.git@restructu
 git+https://github.com/AIF-development-team/checkAIF.git@develop
 
 # Development and testing
+httpx>=0.25.0
 pytest>=7.4.0
 black>=23.9.0
 flake8>=6.1.0

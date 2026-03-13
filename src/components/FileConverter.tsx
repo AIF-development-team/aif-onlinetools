@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Upload, ArrowRight, Download, X, CheckCircle, AlertCircle, FileDown } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { API_BASE } from "@/lib/api";
 
 const SUPPORTED_FORMATS = [
   {label: 'Quantachrome (.txt)', value: 'txt-raw,qnt'},
@@ -62,7 +63,7 @@ export default function FileConverter() {
       formData.append('source_format', sourceFormat);
 
       try {
-        const response = await fetch('https://online.adsorptioninformationformat.com/api/convert', {
+        const response = await fetch(`${API_BASE}/convert`, {
           method: 'POST',
           body: formData,
         });
@@ -142,9 +143,7 @@ export default function FileConverter() {
         
         <Alert className="mb-4 bg-blue-50">
           <AlertDescription>
-            In accordance with GDPR, we do not store or retain any of your uploaded data.
-            All file processing is done locally in your browser, and files are automatically
-            deleted after conversion.
+            Your data stays private. Uploaded files are processed in memory and never stored.
           </AlertDescription>
         </Alert>
       </div>

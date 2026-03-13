@@ -1,8 +1,9 @@
 "use client"
 
 import React, { useState } from 'react';
-import { Upload, FileCheck, AlertCircle } from 'lucide-react';
+import { FileCheck, AlertCircle } from 'lucide-react';
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { API_BASE } from "@/lib/api";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 interface PlotData {
@@ -43,7 +44,7 @@ export default function AIFPlotter() {
     formData.append('file', file);
 
     try {
-      const response = await fetch('https://online.adsorptioninformationformat.com/api/process-aif', {
+      const response = await fetch(`${API_BASE}/process-aif`, {
         method: 'POST',
         body: formData,
       });
@@ -93,7 +94,7 @@ export default function AIFPlotter() {
         
         <Alert className="mb-4 bg-blue-50">
           <AlertDescription>
-          In accordance with GDPR, no data is stored or retained after processing. All data processing is done locally.
+            Your data stays private. Uploaded files are processed in memory and never stored.
           </AlertDescription>
         </Alert>
       </div>

@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Trash2, Plus, Download, Upload } from 'lucide-react';
+import { API_BASE } from "@/lib/api";
 
 // Keeping the existing field definitions
 const requiredMetadata = [
@@ -154,7 +155,7 @@ export default function AifInputDigitizer() {
     fields 
   }: { 
     type: 'adsorption' | 'desorption', 
-    data: any[], 
+    data: Record<string, string>[],
     fields: typeof adsorptionFields 
   }) => (
     <div className="border rounded-lg overflow-hidden">
@@ -239,7 +240,7 @@ export default function AifInputDigitizer() {
         desorption_data: desorptionData.filter(row => Object.keys(row).length > 0)
       };
 
-      const response = await fetch('https://online.adsorptioninformationformat.com/api/input-to-aif', {
+      const response = await fetch(`${API_BASE}/input-to-aif`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -284,9 +285,7 @@ export default function AifInputDigitizer() {
         
         <Alert className="mb-4 bg-blue-50">
           <AlertDescription>
-            In accordance with GDPR, we do not store or retain any of your entered data.
-            All data processing is done locally in your browser, and no information is 
-            transmitted to our servers except during the final AIF export process.
+            Your data stays private. Uploaded files are processed in memory and never stored.
           </AlertDescription>
         </Alert>
       </div>

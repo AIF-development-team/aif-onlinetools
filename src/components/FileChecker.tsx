@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Upload, FileCheck, AlertCircle, CheckCircle2, X, AlertTriangle } from 'lucide-react';
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { API_BASE } from "@/lib/api";
 
 interface CheckResult {
   valid: boolean;
@@ -41,7 +42,7 @@ export default function FileChecker() {
     try {
       const fileContent = await fileObj.file.text();
       
-      const response = await fetch('/api/check-aif', {
+      const response = await fetch(`${API_BASE}/check-aif`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -135,9 +136,7 @@ export default function FileChecker() {
         
         <Alert className="mb-4 bg-blue-50">
           <AlertDescription>
-            In accordance with GDPR, we do not store or retain any of your uploaded data.
-            All file validation is done locally in your browser, and files are automatically
-            deleted after checking.
+            Your data stays private. Uploaded files are processed in memory and never stored.
           </AlertDescription>
         </Alert>
       </div>

@@ -16,7 +16,7 @@ A web application for producing and validating AIF (Adsorption Information Forma
 
 - **Frontend**: React/Next.js with Tailwind CSS
 - **Backend**: Python FastAPI
-- **Deployment**: Docker, Docker Compose, Nginx with Let's Encrypt SSL
+- **Deployment**: DigitalOcean App Platform / Docker Compose
 
 ## Getting Started
 
@@ -30,6 +30,8 @@ A web application for producing and validating AIF (Adsorption Information Forma
    
    # Backend
    cd api
+   python -m venv venv
+   source venv/bin/activate   # Windows: venv\Scripts\activate
    pip install -r requirements.txt
    ```
 
@@ -55,23 +57,28 @@ For a fresh build without cache:
 docker compose build --no-cache && docker compose up -d
 ```
 
-### Setting Up HTTPS with Let's Encrypt
+## Testing
 
-1. Install Certbot:
-   ```bash
-   sudo apt install certbot python3-certbot-nginx
-   ```
+### Frontend
 
-2. Obtain SSL certificate:
-   ```bash
-   sudo certbot --nginx -d your-domain.com
-   ```
+```bash
+npm run lint                # ESLint
+npm run build               # build check
+```
 
-3. Configure Nginx reverse proxy for your containers and restart:
-   ```bash
-   sudo nginx -t
-   sudo systemctl restart nginx
-   ```
+### Backend
+
+```bash
+cd api
+source venv/bin/activate
+pytest tests/ -v                                # run all tests
+pytest tests/test_main.py::test_health_check -v # run a single test
+flake8 main.py --max-line-length 120            # lint
+```
+
+### CI
+
+Tests run automatically via GitHub Actions on push/PR to `main` and `develop`. See `.github/workflows/ci.yml`.
 
 ## API Endpoints
 

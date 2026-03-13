@@ -1,0 +1,22 @@
+name: aif-onlinetools
+region: ams
+
+services:
+  - name: backend
+    dockerfile_path: api/Dockerfile
+    source_dir: /api
+    http_port: 8000
+    routes:
+      - path: /api
+    health_check:
+      http_path: /api/health
+
+  - name: frontend
+    dockerfile_path: Dockerfile.frontend
+    source_dir: /
+    http_port: 3000
+    routes:
+      - path: /
+    envs:
+      - key: NEXT_PUBLIC_API_URL
+        value: ${APP_URL}/api
