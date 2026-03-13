@@ -3,18 +3,22 @@ region: ams
 
 services:
   - name: backend
-    dockerfile_path: api/Dockerfile
     source_dir: /api
+    environment_slug: python
     http_port: 8000
+    build_command: pip install -r requirements.txt
+    run_command: uvicorn main:app --host 0.0.0.0 --port 8000
     routes:
       - path: /api
     health_check:
       http_path: /api/health
 
   - name: frontend
-    dockerfile_path: Dockerfile.frontend
     source_dir: /
+    environment_slug: node-js
     http_port: 3000
+    build_command: npm ci && npm run build
+    run_command: npm start
     routes:
       - path: /
     envs:
