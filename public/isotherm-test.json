@@ -1,0 +1,50 @@
+{
+  "metadata": {
+    "_exptl_adsorptive": "N2",
+    "_exptl_temperature": "77",
+    "_exptl_method": "Volumetric",
+    "_exptl_isotherm_type": "Excess",
+    "_exptl_p0": "101.325",
+    "_adsnt_sample_mass": "0.1",
+    "_adsnt_sample_density": "1.5",
+    "_adsnt_material_id": "Sample-1",
+    "_adsnt_degas_summary": "Sample was degassed under vacuum",
+    "_adsnt_degas_temperature": "373",
+    "_adsnt_degas_time": "12",
+    "_units_temperature": "K",
+    "_units_pressure": "kPa",
+    "_units_mass": "g",
+    "_units_loading": "mmol/g",
+    "_units_density": "g/cm3",
+    "_units_time": "h",
+    "_units_composition_type": "mass"
+  },
+  "adsorption_data": [
+    {
+      "_adsorp_pressure": "0.1",
+      "_adsorp_amount": "1.2"
+    },
+    {
+      "_adsorp_pressure": "0.2",
+      "_adsorp_amount": "2.3"
+    },
+    {
+      "_adsorp_pressure": "0.3",
+      "_adsorp_amount": "3.4"
+    }
+  ],
+  "desorption_data": [
+    {
+      "_desorp_pressure": "0.3",
+      "_desorp_amount": "3.3"
+    },
+    {
+      "_desorp_pressure": "0.2",
+      "_desorp_amount": "2.2"
+    },
+    {
+      "_desorp_pressure": "0.1",
+      "_desorp_amount": "1.1"
+    }
+  ]
+}
